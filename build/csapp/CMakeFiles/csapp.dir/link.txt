@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcsapp.a  CMakeFiles/csapp.dir/csapp.c.o
+/usr/bin/ranlib libcsapp.a

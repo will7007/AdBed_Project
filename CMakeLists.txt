@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 2.8)
+project( Image_server )
+find_package( OpenCV REQUIRED )
+find_package(Threads REQUIRED) #finds pthreads
+include_directories( ${OpenCV_INCLUDE_DIRS})
+add_subdirectory(csapp)
+# link_directories(csapp)
+add_executable( client client.cpp )
+add_executable( server server.cpp )
+target_link_libraries( client LINK_PUBLIC ${OpenCV_LIBS} Threads::Threads csapp)
+target_link_libraries( server LINK_PUBLIC ${OpenCV_LIBS} Threads::Threads csapp)
+#target_include_directories( client PUBLIC "${PROJECT_BINARY_DIR}" "${PROJECT_SOURCE_DIR}/csapp")
+#target_include_directories( server PUBLIC "${PROJECT_BINARY_DIR}" "${PROJECT_SOURCE_DIR}/csapp")
