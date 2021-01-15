@@ -57,12 +57,10 @@ void display(int connfd)
             cv::Mat image = bytesToMat(buf,512,512);
             cv::Mat grayImage;
             cv::cvtColor( image, grayImage, cv::COLOR_BGR2GRAY );
-
-            cv::namedWindow( "Received Image", cv::WINDOW_AUTOSIZE );
-            cv::imshow( "Received Image", image );
-            cv::namedWindow( "Gray Received Image (on server)", cv::WINDOW_AUTOSIZE );
-            cv::imshow( "Gray Received Image (on server)", grayImage );
-            cv::waitKey(0);
+            
+            std::vector<char> imgBytes = matToBytes(grayImage);
+            char * sendBuf = &imgBytes[0];
+            printf("%d bytes written\n",(int)write(connfd,buf,(512*512*3)));
         }
     }
 }
