@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.16.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.16.3/CMakeSystem.cmake"
   "CMakeLists.txt"
+  "classes/CMakeLists.txt"
   "csapp/CMakeLists.txt"
   "/usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake"
   "/usr/local/lib/cmake/opencv4/OpenCVConfig.cmake"
@@ -53,11 +54,14 @@ set(CMAKE_MAKEFILE_OUTPUTS
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "csapp/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "classes/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/server.dir/DependInfo.cmake"
-  "CMakeFiles/client.dir/DependInfo.cmake"
+  "CMakeFiles/server_program.dir/DependInfo.cmake"
+  "CMakeFiles/client_program.dir/DependInfo.cmake"
   "csapp/CMakeFiles/csapp.dir/DependInfo.cmake"
+  "classes/CMakeFiles/server.dir/DependInfo.cmake"
+  "classes/CMakeFiles/client.dir/DependInfo.cmake"
   )

@@ -1,17 +1,37 @@
 [
 {
   "directory": "/home/will/Documents/AdBed_Project/build",
-  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server.dir/server.cpp.o -c /home/will/Documents/AdBed_Project/server.cpp",
-  "file": "/home/will/Documents/AdBed_Project/server.cpp"
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/csapp -I/home/will/Documents/AdBed_Project/classes -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server_program.dir/serverMain.cpp.o -c /home/will/Documents/AdBed_Project/serverMain.cpp",
+  "file": "/home/will/Documents/AdBed_Project/serverMain.cpp"
 },
 {
   "directory": "/home/will/Documents/AdBed_Project/build",
-  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/client.dir/client.cpp.o -c /home/will/Documents/AdBed_Project/client.cpp",
-  "file": "/home/will/Documents/AdBed_Project/client.cpp"
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/csapp -I/home/will/Documents/AdBed_Project/classes -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/client_program.dir/clientMain.cpp.o -c /home/will/Documents/AdBed_Project/clientMain.cpp",
+  "file": "/home/will/Documents/AdBed_Project/clientMain.cpp"
 },
 {
   "directory": "/home/will/Documents/AdBed_Project/build/csapp",
   "command": "/usr/bin/cc  -I/usr/local/include/opencv4 -I/home/will/Documents/AdBed_Project/csapp  -g   -o CMakeFiles/csapp.dir/csapp.c.o   -c /home/will/Documents/AdBed_Project/csapp/csapp.c",
   "file": "/home/will/Documents/AdBed_Project/csapp/csapp.c"
+},
+{
+  "directory": "/home/will/Documents/AdBed_Project/build/classes",
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server.dir/server.cpp.o -c /home/will/Documents/AdBed_Project/classes/server.cpp",
+  "file": "/home/will/Documents/AdBed_Project/classes/server.cpp"
+},
+{
+  "directory": "/home/will/Documents/AdBed_Project/build/classes",
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server.dir/transmitter.cpp.o -c /home/will/Documents/AdBed_Project/classes/transmitter.cpp",
+  "file": "/home/will/Documents/AdBed_Project/classes/transmitter.cpp"
+},
+{
+  "directory": "/home/will/Documents/AdBed_Project/build/classes",
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/client.dir/client.cpp.o -c /home/will/Documents/AdBed_Project/classes/client.cpp",
+  "file": "/home/will/Documents/AdBed_Project/classes/client.cpp"
+},
+{
+  "directory": "/home/will/Documents/AdBed_Project/build/classes",
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/client.dir/transmitter.cpp.o -c /home/will/Documents/AdBed_Project/classes/transmitter.cpp",
+  "file": "/home/will/Documents/AdBed_Project/classes/transmitter.cpp"
 }
 ]

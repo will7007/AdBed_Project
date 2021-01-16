@@ -53,23 +53,46 @@ CMAKE_BINARY_DIR = /home/will/Documents/AdBed_Project
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/server.dir/all
-all: CMakeFiles/client.dir/all
+all: CMakeFiles/server_program.dir/all
+all: CMakeFiles/client_program.dir/all
 all: csapp/all
+all: classes/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: csapp/preinstall
+preinstall: classes/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/server.dir/clean
-clean: CMakeFiles/client.dir/clean
+clean: CMakeFiles/server_program.dir/clean
+clean: CMakeFiles/client_program.dir/clean
 clean: csapp/clean
+clean: classes/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory classes
+
+# Recursive "all" directory target.
+classes/all: classes/CMakeFiles/server.dir/all
+classes/all: classes/CMakeFiles/client.dir/all
+
+.PHONY : classes/all
+
+# Recursive "preinstall" directory target.
+classes/preinstall:
+
+.PHONY : classes/preinstall
+
+# Recursive "clean" directory target.
+classes/clean: classes/CMakeFiles/server.dir/clean
+classes/clean: classes/CMakeFiles/client.dir/clean
+
+.PHONY : classes/clean
 
 #=============================================================================
 # Directory level rules for directory csapp
@@ -90,58 +113,60 @@ csapp/clean: csapp/CMakeFiles/csapp.dir/clean
 .PHONY : csapp/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/server.dir
+# Target rules for target CMakeFiles/server_program.dir
 
 # All Build rule for target.
-CMakeFiles/server.dir/all: csapp/CMakeFiles/csapp.dir/all
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=5,6 "Built target server"
-.PHONY : CMakeFiles/server.dir/all
+CMakeFiles/server_program.dir/all: csapp/CMakeFiles/csapp.dir/all
+CMakeFiles/server_program.dir/all: classes/CMakeFiles/server.dir/all
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/depend
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=11,12 "Built target server_program"
+.PHONY : CMakeFiles/server_program.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
+CMakeFiles/server_program.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server_program.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 0
-.PHONY : CMakeFiles/server.dir/rule
+.PHONY : CMakeFiles/server_program.dir/rule
 
 # Convenience name for target.
-server: CMakeFiles/server.dir/rule
+server_program: CMakeFiles/server_program.dir/rule
 
-.PHONY : server
+.PHONY : server_program
 
 # clean rule for target.
-CMakeFiles/server.dir/clean:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
-.PHONY : CMakeFiles/server.dir/clean
+CMakeFiles/server_program.dir/clean:
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/clean
+.PHONY : CMakeFiles/server_program.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/client.dir
+# Target rules for target CMakeFiles/client_program.dir
 
 # All Build rule for target.
-CMakeFiles/client.dir/all: csapp/CMakeFiles/csapp.dir/all
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/depend
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=1,2 "Built target client"
-.PHONY : CMakeFiles/client.dir/all
+CMakeFiles/client_program.dir/all: csapp/CMakeFiles/csapp.dir/all
+CMakeFiles/client_program.dir/all: classes/CMakeFiles/client.dir/all
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/depend
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=4,5 "Built target client_program"
+.PHONY : CMakeFiles/client_program.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client.dir/all
+CMakeFiles/client_program.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client_program.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 0
-.PHONY : CMakeFiles/client.dir/rule
+.PHONY : CMakeFiles/client_program.dir/rule
 
 # Convenience name for target.
-client: CMakeFiles/client.dir/rule
+client_program: CMakeFiles/client_program.dir/rule
 
-.PHONY : client
+.PHONY : client_program
 
 # clean rule for target.
-CMakeFiles/client.dir/clean:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/clean
-.PHONY : CMakeFiles/client.dir/clean
+CMakeFiles/client_program.dir/clean:
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/clean
+.PHONY : CMakeFiles/client_program.dir/clean
 
 #=============================================================================
 # Target rules for target csapp/CMakeFiles/csapp.dir
@@ -150,7 +175,7 @@ CMakeFiles/client.dir/clean:
 csapp/CMakeFiles/csapp.dir/all:
 	$(MAKE) -f csapp/CMakeFiles/csapp.dir/build.make csapp/CMakeFiles/csapp.dir/depend
 	$(MAKE) -f csapp/CMakeFiles/csapp.dir/build.make csapp/CMakeFiles/csapp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=3,4 "Built target csapp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=6,7 "Built target csapp"
 .PHONY : csapp/CMakeFiles/csapp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -169,6 +194,60 @@ csapp: csapp/CMakeFiles/csapp.dir/rule
 csapp/CMakeFiles/csapp.dir/clean:
 	$(MAKE) -f csapp/CMakeFiles/csapp.dir/build.make csapp/CMakeFiles/csapp.dir/clean
 .PHONY : csapp/CMakeFiles/csapp.dir/clean
+
+#=============================================================================
+# Target rules for target classes/CMakeFiles/server.dir
+
+# All Build rule for target.
+classes/CMakeFiles/server.dir/all: csapp/CMakeFiles/csapp.dir/all
+	$(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/depend
+	$(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=8,9,10 "Built target server"
+.PHONY : classes/CMakeFiles/server.dir/all
+
+# Build rule for subdir invocation for target.
+classes/CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 classes/CMakeFiles/server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 0
+.PHONY : classes/CMakeFiles/server.dir/rule
+
+# Convenience name for target.
+server: classes/CMakeFiles/server.dir/rule
+
+.PHONY : server
+
+# clean rule for target.
+classes/CMakeFiles/server.dir/clean:
+	$(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/clean
+.PHONY : classes/CMakeFiles/server.dir/clean
+
+#=============================================================================
+# Target rules for target classes/CMakeFiles/client.dir
+
+# All Build rule for target.
+classes/CMakeFiles/client.dir/all:
+	$(MAKE) -f classes/CMakeFiles/client.dir/build.make classes/CMakeFiles/client.dir/depend
+	$(MAKE) -f classes/CMakeFiles/client.dir/build.make classes/CMakeFiles/client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=1,2,3 "Built target client"
+.PHONY : classes/CMakeFiles/client.dir/all
+
+# Build rule for subdir invocation for target.
+classes/CMakeFiles/client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 classes/CMakeFiles/client.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/will/Documents/AdBed_Project/CMakeFiles 0
+.PHONY : classes/CMakeFiles/client.dir/rule
+
+# Convenience name for target.
+client: classes/CMakeFiles/client.dir/rule
+
+.PHONY : client
+
+# clean rule for target.
+classes/CMakeFiles/client.dir/clean:
+	$(MAKE) -f classes/CMakeFiles/client.dir/build.make classes/CMakeFiles/client.dir/clean
+.PHONY : classes/CMakeFiles/client.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

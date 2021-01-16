@@ -8,7 +8,8 @@
 					"build" : ".",
 					"childIndexes" : 
 					[
-						1
+						1,
+						2
 					],
 					"minimumCMakeVersion" : 
 					{
@@ -18,8 +19,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0,
-						2
+						1,
+						4
 					]
 				},
 				{
@@ -33,7 +34,22 @@
 					"source" : "csapp",
 					"targetIndexes" : 
 					[
-						1
+						2
+					]
+				},
+				{
+					"build" : "classes",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "classes",
+					"targetIndexes" : 
+					[
+						0,
+						3
 					]
 				}
 			],
@@ -44,24 +60,34 @@
 					"directoryIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					],
 					"name" : "Image_server",
 					"targetIndexes" : 
 					[
 						0,
 						1,
-						2
+						2,
+						3,
+						4
 					]
 				}
 			],
 			"targets" : 
 			[
 				{
-					"directoryIndex" : 0,
-					"id" : "client::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-client-Debug-0100aa9909e7b15a485e.json",
+					"directoryIndex" : 2,
+					"id" : "client::@ce6b8e4836d85b25e7e8",
+					"jsonFile" : "target-client-Debug-96c72cefeb95004078e4.json",
 					"name" : "client",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "client_program::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-client_program-Debug-cb107abce50fea093967.json",
+					"name" : "client_program",
 					"projectIndex" : 0
 				},
 				{
@@ -72,10 +98,17 @@
 					"projectIndex" : 0
 				},
 				{
-					"directoryIndex" : 0,
-					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-Debug-d141d4d0122fb02d7147.json",
+					"directoryIndex" : 2,
+					"id" : "server::@ce6b8e4836d85b25e7e8",
+					"jsonFile" : "target-server-Debug-2621be899d1bd25d55c0.json",
 					"name" : "server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "server_program::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-server_program-Debug-056eefdf0cd127acac50.json",
+					"name" : "server_program",
 					"projectIndex" : 0
 				}
 			]

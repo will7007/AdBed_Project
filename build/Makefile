@@ -111,30 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named server
+# Target rules for targets named server_program
 
 # Build rule for target.
-server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 server
-.PHONY : server
+server_program: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server_program
+.PHONY : server_program
 
 # fast build rule for target.
-server/fast:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-.PHONY : server/fast
+server_program/fast:
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/build
+.PHONY : server_program/fast
 
 #=============================================================================
-# Target rules for targets named client
+# Target rules for targets named client_program
 
 # Build rule for target.
-client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 client
-.PHONY : client
+client_program: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 client_program
+.PHONY : client_program
 
 # fast build rule for target.
-client/fast:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
-.PHONY : client/fast
+client_program/fast:
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/build
+.PHONY : client_program/fast
 
 #=============================================================================
 # Target rules for targets named csapp
@@ -149,59 +149,85 @@ csapp/fast:
 	$(MAKE) -f csapp/CMakeFiles/csapp.dir/build.make csapp/CMakeFiles/csapp.dir/build
 .PHONY : csapp/fast
 
-client.o: client.cpp.o
+#=============================================================================
+# Target rules for targets named server
 
-.PHONY : client.o
+# Build rule for target.
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
+
+# fast build rule for target.
+server/fast:
+	$(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+#=============================================================================
+# Target rules for targets named client
+
+# Build rule for target.
+client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 client
+.PHONY : client
+
+# fast build rule for target.
+client/fast:
+	$(MAKE) -f classes/CMakeFiles/client.dir/build.make classes/CMakeFiles/client.dir/build
+.PHONY : client/fast
+
+clientMain.o: clientMain.cpp.o
+
+.PHONY : clientMain.o
 
 # target to build an object file
-client.cpp.o:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.o
-.PHONY : client.cpp.o
+clientMain.cpp.o:
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/clientMain.cpp.o
+.PHONY : clientMain.cpp.o
 
-client.i: client.cpp.i
+clientMain.i: clientMain.cpp.i
 
-.PHONY : client.i
+.PHONY : clientMain.i
 
 # target to preprocess a source file
-client.cpp.i:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.i
-.PHONY : client.cpp.i
+clientMain.cpp.i:
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/clientMain.cpp.i
+.PHONY : clientMain.cpp.i
 
-client.s: client.cpp.s
+clientMain.s: clientMain.cpp.s
 
-.PHONY : client.s
+.PHONY : clientMain.s
 
 # target to generate assembly for a file
-client.cpp.s:
-	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
-.PHONY : client.cpp.s
+clientMain.cpp.s:
+	$(MAKE) -f CMakeFiles/client_program.dir/build.make CMakeFiles/client_program.dir/clientMain.cpp.s
+.PHONY : clientMain.cpp.s
 
-server.o: server.cpp.o
+serverMain.o: serverMain.cpp.o
 
-.PHONY : server.o
+.PHONY : serverMain.o
 
 # target to build an object file
-server.cpp.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.o
-.PHONY : server.cpp.o
+serverMain.cpp.o:
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/serverMain.cpp.o
+.PHONY : serverMain.cpp.o
 
-server.i: server.cpp.i
+serverMain.i: serverMain.cpp.i
 
-.PHONY : server.i
+.PHONY : serverMain.i
 
 # target to preprocess a source file
-server.cpp.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.i
-.PHONY : server.cpp.i
+serverMain.cpp.i:
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/serverMain.cpp.i
+.PHONY : serverMain.cpp.i
 
-server.s: server.cpp.s
+serverMain.s: serverMain.cpp.s
 
-.PHONY : server.s
+.PHONY : serverMain.s
 
 # target to generate assembly for a file
-server.cpp.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.s
-.PHONY : server.cpp.s
+serverMain.cpp.s:
+	$(MAKE) -f CMakeFiles/server_program.dir/build.make CMakeFiles/server_program.dir/serverMain.cpp.s
+.PHONY : serverMain.cpp.s
 
 # Help Target
 help:
@@ -211,15 +237,17 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... server_program"
+	@echo "... client_program"
+	@echo "... csapp"
 	@echo "... server"
 	@echo "... client"
-	@echo "... csapp"
-	@echo "... client.o"
-	@echo "... client.i"
-	@echo "... client.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
+	@echo "... clientMain.o"
+	@echo "... clientMain.i"
+	@echo "... clientMain.s"
+	@echo "... serverMain.o"
+	@echo "... serverMain.i"
+	@echo "... serverMain.s"
 .PHONY : help
 
 
