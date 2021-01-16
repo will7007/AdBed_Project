@@ -20,17 +20,19 @@ int main(int argc, char **argv)
 	int imgHeight = imgWidth;
 	int bytesWritten;
 
-	if((bytesWritten = clientTransmitter.send(clientTransmitter.getFileDescriptor(), image, imgWidth, imgHeight, 3)) >= imgHeight*imgWidth*3) {
-		printf("%d bytes written\n", bytesWritten);
+	if((bytesWritten = clientTransmitter.send(&image, imgWidth, imgHeight, 3)) >= imgHeight*imgWidth*3) {
+		printf("Client sent %d bytes\n", bytesWritten);
 	}
     
-	cv::Mat * receivedImage = clientTransmitter.receive(clientTransmitter.getFileDescriptor(), imgWidth, imgHeight, 1); 
-	if(receivedImage != nullptr && receivedImage->data) { //possibly redundant
+	cv::Mat * receivedImage = clientTransmitter.receive(imgWidth, imgHeight, 1); 
+	if(receivedImage->data) {
+		printf("Image received\n");
 		clientTransmitter.show(&image,receivedImage);
+		delete receivedImage->datastart;
 		delete receivedImage;
 	}
 	else { printf("Error: failed to receive image back from server"); }
 
-    Close(clientTransmitter.getFileDescriptor()); //line:netp:echoclient:close
+    Close(clientTransmitter.getFileDescriptor()); //just an extra precaution
     exit(0);
 }

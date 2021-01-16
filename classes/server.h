@@ -14,6 +14,6 @@ public:
     server();
     ~server() {};
     void listen();
-    cv::Mat * operate(cv::Mat *input);
+    cv::Mat* operate(cv::Mat *input);
 };
 #endif

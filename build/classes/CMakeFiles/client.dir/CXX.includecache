@@ -6,17 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/will/Documents/AdBed_Project/classes/client.cpp
-client.h
-/home/will/Documents/AdBed_Project/classes/client.h
-
-/home/will/Documents/AdBed_Project/classes/client.h
+/home/will/Documents/AdBed_Project/classes/transmitter.cpp
 transmitter.h
 /home/will/Documents/AdBed_Project/classes/transmitter.h
-string
--
-../csapp/csapp.h
-/home/will/Documents/AdBed_Project/csapp/csapp.h
 
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp
