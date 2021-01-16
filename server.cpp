@@ -60,7 +60,7 @@ void display(int connfd)
             
             std::vector<char> imgBytes = matToBytes(grayImage);
             char * sendBuf = &imgBytes[0];
-            printf("%d bytes written\n",(int)write(connfd,buf,(512*512*3)));
+            printf("%d bytes written\n",(int)write(connfd,sendBuf,(512*512)));
         }
     }
 }

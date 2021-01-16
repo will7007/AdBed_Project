@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     char picture[512*512*3];
     int current_offset = 0;
 
-    while((n = recv(clientfd, recBuf, 512*512*3,MSG_WAITALL)) != 0) {
+    while((n = recv(clientfd, recBuf, 512*512,MSG_WAITALL)) != 0) {
         //recv is like read but for sockets--we can specify helpful flags
         //like wait all, which waits for everything to come in before reading
         //(although it could still stop early due to an error)
@@ -65,13 +65,10 @@ int main(int argc, char **argv)
         current_offset += n;
         printf("Source %p dest %p bytes %d\n", (void *)(picture + current_offset), (void *)(recBuf), (int)n);
 
-        if(current_offset >= (512*512*3)) {
+        if(current_offset >= (512*512)) {
             printf("server received %d bytes\n", (int)current_offset);
 
-            cv::Mat image = bytesToMat(recBuf,512,512);
-            cv::Mat grayImage;
-            cv::cvtColor( image, grayImage, cv::COLOR_BGR2GRAY );
-
+            cv::Mat grayImage = bytesToMat(recBuf,512,512);
             cv::namedWindow( "Sent Image", cv::WINDOW_AUTOSIZE );
             cv::imshow( "Sent Image", image );
             cv::namedWindow( "Received Image", cv::WINDOW_AUTOSIZE );
@@ -97,7 +94,7 @@ std::vector<char> matToBytes(cv::Mat image)
 cv::Mat bytesToMat(char * bytes,int width,int height)
 {
 	//https://stackoverflow.com/questions/33027942/opencv-convert-image-to-bytes-and-back
-	cv::Mat image = cv::Mat(height,width,CV_8UC3,bytes).clone(); // make a copy
+	cv::Mat image = cv::Mat(height,width,CV_8UC1,bytes).clone(); // make a copy
 	//if we don't make a deep copy then when we leave the function scope our
 	//data can get overwritten
 	//cv::Mat image(height,width,CV_8UC3,bytes.data()); //wrong, shows nothing
