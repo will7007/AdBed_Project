@@ -1,25 +1,22 @@
 #include "transmitter.h"
 
 cv::Mat* transmitter::receive(int channels) {
-    // transmitSize *size = receiveSize();
+    transmitSize *size = receiveSize();
     cv::Mat* returnValue = nullptr;
-    // if(size != nullptr) {
-        // returnValue = receiveImage(size);
-    if(true) {
-        returnValue = receiveImage(512,512,channels);
-        // delete size;
+    if(size != nullptr) {
+        returnValue = receiveImage(size);
+        delete size;
     }
     return returnValue;
 }
 
 int transmitter::send(cv::Mat* image) {
-    // return sendSize(image) ? sendImage(image) : 0;
-    return true ? sendImage(image) : 0;
+    return sendSize(image) ? sendImage(image) : 0;
 }
 
 transmitter::transmitSize* transmitter::receiveSize() {
     transmitSize *recBuf = new transmitSize;
-    if(recv(fileDescriptor, &recBuf, 10, MSG_WAITALL) == 10) {
+    if(recv(fileDescriptor, recBuf, 10, MSG_WAITALL) == 10) {
         return recBuf;
     }
     else {
@@ -57,7 +54,6 @@ cv::Mat* transmitter::receiveImage(transmitter::transmitSize *sizeStruct) {
 
 int transmitter::sendImage(cv::Mat* image) {
     cv::Size size = image->size();
-    printf("Sent width: %d\n", size.width);
     return write(fileDescriptor,matToBytes(image),
                     (size.width*size.height*image->channels()));
 }

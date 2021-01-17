@@ -4,23 +4,38 @@
 
 int main(int argc, char **argv) 
 {
-    cv::Mat image = cv::imread("./lena.jpg", 1);
+    cv::Mat image;
 	client clientTransmitter = client();
+	int bytesWritten = 0;
 	
-    if( !image.data ){
-        printf( " No image data \n " );
-        if( argc != 2) {
-            printf(" ./lena.jpg does not exist \n");
-            // printf(" Supply an argument if you want to use something else \n");
-        }
-		return -1;
+    switch(argc) {
+		case 1:
+			image = cv::imread("./lena.jpg", 1);
+			if(!image.data) {
+				fprintf(stderr, "Default picture ./lena.jpg does not exist\n");
+				fprintf(stderr, "Provide path to a picture as an argument\n");
+				exit(0);
+			}
+			break;
+		case 2:
+			image = cv::imread(argv[1], 1);
+			if(!image.data) {
+				fprintf(stderr, "No image data in provided file\n");
+				exit(0);
+			}
+			break;
+		default:
+			fprintf(stderr, "Too many arguments (coming soon)\n");
+			exit(0);
+			break;
 	}
 
-	int imgWidth = 512;
-	int imgHeight = imgWidth;
-	int bytesWritten;
+	int imgWidth = image.size().width;
+	int imgHeight = image.size().height;
+	int channels = image.channels();
 
-	if((bytesWritten = clientTransmitter.send(&image)) >= imgHeight*imgWidth*3) {
+	if((bytesWritten = clientTransmitter.send(&image)) >=
+			imgHeight*imgWidth*channels) {
 		printf("Client sent %d bytes\n", bytesWritten);
 	}
     
