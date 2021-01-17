@@ -96,6 +96,7 @@ client_program: /usr/local/lib/libopencv_videoio.so.4.5.1
 client_program: /usr/local/lib/libopencv_imgcodecs.so.4.5.1
 client_program: /usr/local/lib/libopencv_imgproc.so.4.5.1
 client_program: /usr/local/lib/libopencv_core.so.4.5.1
+client_program: csapp/libcsapp.a
 client_program: CMakeFiles/client_program.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/will/Documents/AdBed_Project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable client_program"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client_program.dir/link.txt --verbose=$(VERBOSE)

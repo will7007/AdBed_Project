@@ -9,8 +9,7 @@ using std::string;
 
 class client : public transmitter {
 private:
-    //port
-    //fileDescriptor
+    int clientFileDescriptor;
     string host = "127.0.0.1";
     int clientNumber;
     int setup();
@@ -19,5 +18,8 @@ public:
     client(int clientNumberArg = 0);
     ~client();
     void show(cv::Mat *imgOriginal, cv::Mat *imgModified);
+    cv::Mat* receive();
+    int send(cv::Mat* image);
+    int getFileDescriptor() { return clientFileDescriptor; }
 };
 #endif

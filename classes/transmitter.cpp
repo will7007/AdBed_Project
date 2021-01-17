@@ -1,20 +1,20 @@
 #include "transmitter.h"
 
-cv::Mat* transmitter::receive(int channels) {
-    transmitSize *size = receiveSize();
+cv::Mat* transmitter::receive(int fileDescriptor) {
+    transmitSize *size = receiveSize(fileDescriptor);
     cv::Mat* returnValue = nullptr;
     if(size != nullptr) {
-        returnValue = receiveImage(size);
+        returnValue = receiveImage(size, fileDescriptor);
         delete size;
     }
     return returnValue;
 }
 
-int transmitter::send(cv::Mat* image) {
-    return sendSize(image) ? sendImage(image) : 0;
+int transmitter::send(cv::Mat* image, int fileDescriptor) {
+    return sendSize(image, fileDescriptor) ? sendImage(image, fileDescriptor) : 0;
 }
 
-transmitter::transmitSize* transmitter::receiveSize() {
+transmitter::transmitSize* transmitter::receiveSize(int fileDescriptor) {
     transmitSize *recBuf = new transmitSize;
     if(recv(fileDescriptor, recBuf, 10, MSG_WAITALL) == 10) {
         return recBuf;
@@ -25,7 +25,7 @@ transmitter::transmitSize* transmitter::receiveSize() {
     }
 }
 
-bool transmitter::sendSize(cv::Mat* image) {
+bool transmitter::sendSize(cv::Mat* image, int fileDescriptor) {
     cv::Size size = image->size();
     transmitSize sendBuf;
     sendBuf.width = size.width;
@@ -34,7 +34,7 @@ bool transmitter::sendSize(cv::Mat* image) {
     return (write(fileDescriptor,&sendBuf,10) == 10);
 }
 
-cv::Mat* transmitter::receiveImage(int width, int height, int channels) {
+cv::Mat* transmitter::receiveImage(int width, int height, int channels, int fileDescriptor) {
     int size = width*height*channels;
     char *recBuf = new char[size];
     //don't forget to deallocate before erasing image
@@ -45,20 +45,18 @@ cv::Mat* transmitter::receiveImage(int width, int height, int channels) {
 	else { return nullptr; }
 }
 
-cv::Mat* transmitter::receiveImage(transmitter::transmitSize *sizeStruct) {
+cv::Mat* transmitter::receiveImage(transmitter::transmitSize *sizeStruct, int fileDescriptor) {
     int width = sizeStruct->width;
     int height = sizeStruct->height;
     int channels = sizeStruct->channels;
-    return receiveImage(width, height, channels);
+    return receiveImage(width, height, channels, fileDescriptor);
 }
 
-int transmitter::sendImage(cv::Mat* image) {
+int transmitter::sendImage(cv::Mat* image, int fileDescriptor) {
     cv::Size size = image->size();
     return write(fileDescriptor,matToBytes(image),
                     (size.width*size.height*image->channels()));
 }
-
-//https://stackoverflow.com/questions/33027942/opencv-convert-image-to-bytes-and-back
 
 char* transmitter::matToBytes(cv::Mat* image) {
     return (char *)(image->datastart);

@@ -11,6 +11,8 @@ transmitter.h
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 ../csapp/csapp.h
 /home/will/Documents/AdBed_Project/csapp/csapp.h
+pthread.h
+-
 
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp

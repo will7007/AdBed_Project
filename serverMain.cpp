@@ -4,7 +4,9 @@
 
 int main(int argc, char **argv) 
 {
-    server serverTransmitter = server();
+    int version = 2;
+    if(argc == 2) { version = atoi(argv[1]); }
+    server serverTransmitter = server(version);
     serverTransmitter.listen();
     exit(0);
 }

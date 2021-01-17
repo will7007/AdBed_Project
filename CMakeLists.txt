@@ -5,7 +5,6 @@ find_package(Threads REQUIRED) #finds pthreads
 include_directories( ${OpenCV_INCLUDE_DIRS})
 add_subdirectory(csapp)
 add_subdirectory(classes)
-# link_directories(csapp)
 add_executable( client_program clientMain.cpp )
 add_executable( server_program serverMain.cpp )
 target_link_libraries( client_program LINK_PUBLIC ${OpenCV_LIBS} Threads::Threads csapp client)

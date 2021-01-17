@@ -15,12 +15,9 @@ class transmitter {
      */
 protected:
     int port = 111;
-    int fileDescriptor;
+    // int fileDescriptor; //must be dynamically created or made in queue
     transmitter() {};
     virtual ~transmitter() {};
-    cv::Mat* receiveImage(int width, int height, int channels);
-    int sendImage(cv::Mat* image);
-
     struct transmitSize {
         int width;
         int height;
@@ -28,15 +25,17 @@ protected:
         uint8_t operations;
         //10 bytes total
     };
-    transmitSize* receiveSize();
-    bool sendSize(cv::Mat* image);
-    cv::Mat* receiveImage(transmitter::transmitSize *sizeStruct);
+    cv::Mat* receiveImage(transmitSize *sizeStruct, int fileDescriptor);
+    cv::Mat* receiveImage(int width, int height, int channels, int fileDescriptor);
+    int sendImage(cv::Mat* image, int fileDescriptor);
+    transmitSize* receiveSize(int fileDescriptor);
+    bool sendSize(cv::Mat* image, int fileDescriptor);
 public:
-    cv::Mat* receive(int channels); //should have no arguments in the future
-    int send(cv::Mat* image);
+    cv::Mat* receive(int fileDescriptor);
+    int send(cv::Mat* image, int fileDescriptor);
     char* matToBytes(cv::Mat* image);
     cv::Mat* bytesToMat(char *bytes,int width,int height,bool grey);
     int getPort() { return port; }
-    int getFileDescriptor() { return fileDescriptor; }
+    // int getFileDescriptor() { return fileDescriptor; }
 };
 #endif

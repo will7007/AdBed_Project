@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 		printf("Client sent %d bytes\n", bytesWritten);
 	}
     
-	cv::Mat * receivedImage = clientTransmitter.receive(1); 
+	cv::Mat * receivedImage = clientTransmitter.receive(); 
 	if(receivedImage != nullptr && receivedImage->data) {
 		printf("Image received\n");
 		clientTransmitter.show(&image,receivedImage);
