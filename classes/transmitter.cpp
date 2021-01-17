@@ -6,7 +6,7 @@ cv::Mat* transmitter::receive(int channels) {
     // if(size != nullptr) {
         // returnValue = receiveImage(size);
     if(true) {
-        returnValue = receiveImage(512,512,3);
+        returnValue = receiveImage(512,512,channels);
         // delete size;
     }
     return returnValue;
@@ -57,6 +57,7 @@ cv::Mat* transmitter::receiveImage(transmitter::transmitSize *sizeStruct) {
 
 int transmitter::sendImage(cv::Mat* image) {
     cv::Size size = image->size();
+    printf("Sent width: %d\n", size.width);
     return write(fileDescriptor,matToBytes(image),
                     (size.width*size.height*image->channels()));
 }

@@ -25,13 +25,13 @@ int main(int argc, char **argv)
 	}
     
 	cv::Mat * receivedImage = clientTransmitter.receive(1); 
-	if(receivedImage->data) {
+	if(receivedImage != nullptr && receivedImage->data) {
 		printf("Image received\n");
 		clientTransmitter.show(&image,receivedImage);
 		delete receivedImage->datastart;
 		delete receivedImage;
 	}
-	else { printf("Error: failed to receive image back from server"); }
+	else { printf("Error: failed to receive image back from server\n"); }
 
     Close(clientTransmitter.getFileDescriptor()); //just an extra precaution
     exit(0);
