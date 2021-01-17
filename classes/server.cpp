@@ -1,7 +1,7 @@
 #include "server.h"
 
-server::server() {
-    // port = portArg;
+server::server(int portArg) {
+    port = portArg;
     fileDescriptorListen = Open_listenfd(port);
 }
 
@@ -20,12 +20,12 @@ void server::listen() {
         haddrp = inet_ntoa(clientaddr.sin_addr);
         printf("server connected to %s (%s)\n", hp->h_name, haddrp);
 
-        cv::Mat *receivedImage = this->receive(512,512,3);
+        cv::Mat *receivedImage = this->receive(3);
         printf("Image received\n");
         cv::Mat *newImage = this->operate(receivedImage);
         delete receivedImage->datastart;
         delete receivedImage;
-        printf("Server sent %d bytes\n", this->send(newImage,512,512,1));
+        printf("Server sent %d bytes\n", this->send(newImage));
         delete newImage;
         
         Close(fileDescriptor);

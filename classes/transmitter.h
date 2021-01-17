@@ -14,16 +14,28 @@ class transmitter {
      * envelope itself
      */
 protected:
-    int port;
+    int port = 51238;
     int fileDescriptor;
-    transmitter(int portArg = 111) { port = portArg; };
+    transmitter() {};
     virtual ~transmitter() {};
+    cv::Mat* receiveImage(int width, int height, int channels);
+    int sendImage(cv::Mat* image);
+
+    struct transmitSize {
+        int width;
+        int height;
+        uint8_t channels;
+        uint8_t operations;
+        //10 bytes total
+    };
+    transmitSize* receiveSize();
+    bool sendSize(cv::Mat* image);
+    cv::Mat* receiveImage(transmitter::transmitSize *sizeStruct);
 public:
-    cv::Mat* receive(int width, int height, int channels);
-    int send(cv::Mat* image, int imgWidth, int imgHeight, int channels);
+    cv::Mat* receive(int channels); //should have no arguments in the future
+    int send(cv::Mat* image);
     char* matToBytes(cv::Mat* image);
     cv::Mat* bytesToMat(char *bytes,int width,int height,bool grey);
-    // cv::Mat* receiveImage(int socket,int width,int height,int channels);
     int getPort() { return port; }
     int getFileDescriptor() { return fileDescriptor; }
 };

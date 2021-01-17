@@ -20,11 +20,11 @@ int main(int argc, char **argv)
 	int imgHeight = imgWidth;
 	int bytesWritten;
 
-	if((bytesWritten = clientTransmitter.send(&image, imgWidth, imgHeight, 3)) >= imgHeight*imgWidth*3) {
+	if((bytesWritten = clientTransmitter.send(&image)) >= imgHeight*imgWidth*3) {
 		printf("Client sent %d bytes\n", bytesWritten);
 	}
     
-	cv::Mat * receivedImage = clientTransmitter.receive(imgWidth, imgHeight, 1); 
+	cv::Mat * receivedImage = clientTransmitter.receive(1); 
 	if(receivedImage->data) {
 		printf("Image received\n");
 		clientTransmitter.show(&image,receivedImage);

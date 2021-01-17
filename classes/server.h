@@ -10,8 +10,7 @@ private:
     //fileDescriptor
     int fileDescriptorListen;
 public:
-    // server(int portArg = 111);
-    server();
+    server(int portArg = 111);
     ~server() {};
     void listen();
     cv::Mat* operate(cv::Mat *input);
