@@ -12,9 +12,8 @@ private:
     int fileDescriptorListen;
     int codeVersion = 2;
     static void* transactionThreaded(void *connectionFileDescriptor);
-    // void transaction(int fileDescriptor);
-    //static lets us avoid passing "this" to pthread
-    //so we can use the class function
+    void transaction(server *caller, int *fileDescriptor);
+    void displayConnectionInfo(sockaddr_in *clientaddr);
     struct threadArgs {
         server* caller;
         int* fd;
