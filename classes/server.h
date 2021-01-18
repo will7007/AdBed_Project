@@ -4,21 +4,29 @@
 #include "transmitter.h"
 #include "../csapp/csapp.h"
 #include <pthread.h>
+#include <queue>
 
-class server : public transmitter {
+class server : public transmitter { //maybe split into successive child classes for different parts?
 private:
-    //port
-    //fileDescriptor
     int fileDescriptorListen;
     int codeVersion = 2;
-    static void* transactionThreaded(void *connectionFileDescriptor);
+    //single-threaded
     void transaction(server *caller, int *fileDescriptor);
     void displayConnectionInfo(sockaddr_in *clientaddr);
+    //threaded
+    static void* transactionThreaded(void *connectionFileDescriptor);
     struct threadArgs {
         server* caller;
         int* fd;
     };
-    void printConnectionInfo(sockaddr_in* clientaddr);
+    //pre-threaded
+    std::queue<int *> connectionQueue;
+    pthread_mutex_t queueMutex;
+    static void* transactionConsumer(void *callerArg);
+    int maxThreads = 7;
+    pthread_t* threadID;
+    pthread_cond_t hungry, justAte;
+    int queueLimit = 14; //should be 2*maxThreads
 public:
     server(int codeVersionArg = 2);
     ~server() {};
