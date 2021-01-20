@@ -34,16 +34,32 @@ void server::listen() {
         delete threadID;
     }
 
-    else if(codeVersion == 3) {
-        threadID = new pthread_t[maxThreads];
+    else if(codeVersion == 3 || codeVersion == 4) {
         printf("Running producer/consumer pre-threaded server\n");
+        threadID = new pthread_t[maxThreads];
+        pthread_attr_t threadAttr; //making this a pointer to nullptr caused a segfault
         pthread_mutex_init(&queueMutex, NULL);
-        printf("Mutex initalized\n");
         pthread_cond_init (&hungry, NULL);
         pthread_cond_init (&justAte, NULL);
-        printf("CVs initalized\n");
+
+        if(codeVersion == 4) {
+            struct sched_param my_param;
+            my_param.sched_priority = sched_get_priority_max(SCHED_RR);
+            // printf("Thead priorities will also be set to %d\n",my_param.sched_priority);
+            pthread_setschedparam(pthread_self(), SCHED_RR, &my_param);
+            printf("Main thread priority assigned to %d",getThreadPriority());
+
+            //explicitly set policy to round robbin and a lower priority than main
+            //(if we are able to make it lower) for worker threads
+            pthread_attr_init(&threadAttr);
+            pthread_attr_setinheritsched(&threadAttr, PTHREAD_EXPLICIT_SCHED);
+            pthread_attr_setschedpolicy(&threadAttr, SCHED_RR);
+            if(my_param.sched_priority > 1) { my_param.sched_priority -= 1;}
+            pthread_attr_setschedparam(&threadAttr, &my_param);
+        }
+
         for(int threads = 0; threads < maxThreads; threads++) {
-            pthread_create(&threadID[threads], NULL, &transactionConsumer, static_cast<void *>(this));
+            pthread_create(&threadID[threads], &threadAttr, &transactionConsumer, static_cast<void *>(this));
             printf("Thead %d created\n", threads);
         }
         while(1) {
@@ -81,7 +97,7 @@ void* server::transactionConsumer(void *callerArg) {
     int threadNumber = -1;
     for(int IDNum = 0; IDNum < caller->maxThreads; IDNum++) {
         if(pthread_equal(id,caller->threadID[IDNum])) {
-            printf("Thread %d is now active\n", IDNum);
+            printf("Thread %d is now active with priority of %d\n", IDNum, caller->getThreadPriority());
             threadNumber = IDNum;
             break;
         }
@@ -135,4 +151,12 @@ void server::displayConnectionInfo(sockaddr_in *clientaddr) {
                         sizeof(clientaddr->sin_addr.s_addr), AF_INET);
     haddrp = inet_ntoa(clientaddr->sin_addr);
     printf("server connected to %s (%s)\n", hp->h_name, haddrp);
+}
+
+int server::getThreadPriority() {
+    pthread_t thread_id = pthread_self();
+	struct sched_param param;
+	int policy, ret;
+	ret = pthread_getschedparam (thread_id, &policy, &param);
+	return param.sched_priority;
 }
