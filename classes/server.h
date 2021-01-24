@@ -28,6 +28,7 @@ private:
     pthread_cond_t hungry, justAte;
     int queueLimit = 14; //should be 2*maxThreads
     int getThreadPriority();
+    int sleepTime = 10;
 public:
     server(int codeVersionArg = 2);
     ~server() {};
