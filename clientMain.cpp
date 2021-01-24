@@ -1,6 +1,7 @@
 #include "classes/transmitter.h"
 #include "classes/client.h"
 #include <opencv2/opencv.hpp>
+#include "./colors.h"
 
 int main(int argc, char **argv) 
 {
@@ -41,17 +42,17 @@ int main(int argc, char **argv)
 
 	if((bytesWritten = clientTransmitter.send(&image)) >=
 			imgHeight*imgWidth*channels) {
-		printf("Client sent %d bytes\n", bytesWritten);
+		printf(FGRN("Client sent %d bytes\n"), bytesWritten);
 	}
     
 	cv::Mat * receivedImage = clientTransmitter.receive(); 
 	if(receivedImage != nullptr && receivedImage->data) {
-		printf("Image received\n");
+		printf(FGRN("Image received\n"));
 		if(showImage) {	clientTransmitter.show(&image,receivedImage); }
 		delete receivedImage->datastart;
 		delete receivedImage;
 	}
-	else { printf("Error: failed to receive image back from server\n"); }
+	else { printf(FGRN("Error: failed to receive image back from server\n")); }
 
     Close(clientTransmitter.getFileDescriptor()); //just an extra precaution
     exit(0);

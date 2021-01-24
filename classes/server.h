@@ -5,6 +5,7 @@
 #include "../csapp/csapp.h"
 #include <pthread.h>
 #include <queue>
+#include "../colors.h"
 
 class server : public transmitter { //maybe split into successive child classes for different parts?
 private:

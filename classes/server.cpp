@@ -1,5 +1,11 @@
 #include "server.h"
 
+//yellow = fd queue is full
+//blue = thead is hungry but queue is empty, so time to sleep
+//red = thread is eating a fd/thread created to eat fd
+//cyan = fd added to queue by server
+//green = messages from the client
+
 server::server(int codeVersionArg) {
     codeVersion = codeVersionArg;
     fileDescriptorListen = Open_listenfd(port);
@@ -80,14 +86,14 @@ void server::listen() {
             displayConnectionInfo(&clientaddr);
             pthread_mutex_lock(&queueMutex);
             if(connectionQueue.size() >= queueLimit) {
-                printf("The queue is full (with %lu file descriptors)\n", connectionQueue.size());
+                printf(FYEL("The queue is full (with %lu file descriptors)\n"), connectionQueue.size());
                 //std::cout << "The queue is full (with " << connectionQueue.size() << " file descriptors)\n";
-                printf("Connection %d will be added once there is room: main thread is waiting for room...\n", *fileDescriptor);
+                printf(FYEL("Connection %d will be added once there is room: main thread is waiting for room...\n"), *fileDescriptor);
                 //std::cout << "Connection " << *fileDescriptor << " will be added once there is room: main thread is waiting for room...\n";
                 pthread_cond_wait(&justAte,&queueMutex);
             }
             connectionQueue.push(fileDescriptor);
-            printf("Connection %d was added to the queue: size is now %lu\n", *fileDescriptor, connectionQueue.size());
+            printf(FCYN("Connection %d was added to the queue: size is now %lu\n"), *fileDescriptor, connectionQueue.size());
             //std::cout << "Connection " << *fileDescriptor << " was added to the queue: size is now " << connectionQueue.size() << std::endl;
             pthread_mutex_unlock(&queueMutex);
             pthread_cond_signal(&hungry);
@@ -120,10 +126,11 @@ void* server::transactionConsumer(void *callerArg) {
     }
     if(threadNumber < -1) { printf("Something is wrong with the threads... (thread ID is -1\n"); }
     // { std::cout << "Something is wrong with the threads... (thread ID is -1)\n"; }
+    int processedImages = 0;
     while(1) { //TODO: break out of this loop to rejoin main when a running variable inside of caller is set to false
         pthread_mutex_lock(&(caller->queueMutex));
         if(caller->connectionQueue.empty()) {
-            printf("Connection queue is empty, so thread %d is sleeping\n", threadNumber);
+            printf(FBLU("Connection queue is empty, so thread %d is sleeping\n"), threadNumber);
             //std::cout << "Connection queue is empty, so thread " << threadNumber << " is sleeping\n";
             pthread_cond_wait(&(caller->hungry), &(caller->queueMutex));
         }
@@ -132,9 +139,10 @@ void* server::transactionConsumer(void *callerArg) {
         caller->connectionQueue.pop();
         pthread_mutex_unlock(&(caller->queueMutex));
         pthread_cond_signal(&(caller->justAte));
-        printf("Thread %d just ate connection %d\n", threadNumber, fileDescriptor);
+        printf(FRED("Thread %d just ate connection %d\n"), threadNumber, fileDescriptor);
         //std::cout << "Thread " << threadNumber << " just ate connection " << fileDescriptor << std::endl;
         caller->transaction(caller, &fileDescriptor);
+        printf(FBLU("Thread %d has processed %d image(s) so far\n"), threadNumber, ++processedImages);
     }
     printf("Thread %d is shutting down\n", threadNumber);
     //std::cout << "Thread " << threadNumber << " is shutting down\n";
@@ -143,7 +151,7 @@ void* server::transactionConsumer(void *callerArg) {
 
 void* server::transactionThreaded(void *args) { //points to array of void *
     threadArgs* argsStruct = ((threadArgs*)args);
-    printf("Socket fd %d is being handled in a new thread\n", (*(argsStruct->fd)));
+    printf(FRED("Socket fd %d is being handled in a new thread\n"), (*(argsStruct->fd)));
     //std::cout << "Socket fd " << (*(argsStruct->fd)) << " is being handled in a new thread\n";
     argsStruct->caller->transaction(argsStruct->caller,argsStruct->fd);
     delete argsStruct->fd;
@@ -155,7 +163,7 @@ void server::transaction(server *caller, int *fileDescriptor) {
     printf("Receiving image from client\n");
     //std::cout << "Receiving image from client\n";
     cv::Mat *receivedImage = caller->receive(*fileDescriptor);
-    printf("Image received over socket fd %d, sleeping for %d seconds\n", *fileDescriptor, caller->sleepTime);
+    printf("Received image over socket fd %d, sleeping for %d seconds\n", *fileDescriptor, caller->sleepTime);
     //std::cout << "Image received over socket fd " << *fileDescriptor << ", sleeping for " << caller->sleepTime << " seconds\n";
     sleep(caller->sleepTime);
     printf("Performing OpenCV operations on image\n");

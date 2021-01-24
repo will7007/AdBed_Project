@@ -3,6 +3,7 @@
 
 CMakeFiles/server_program.dir/serverMain.cpp.o: classes/server.h
 CMakeFiles/server_program.dir/serverMain.cpp.o: classes/transmitter.h
+CMakeFiles/server_program.dir/serverMain.cpp.o: colors.h
 CMakeFiles/server_program.dir/serverMain.cpp.o: csapp/csapp.h
 CMakeFiles/server_program.dir/serverMain.cpp.o: serverMain.cpp
 CMakeFiles/server_program.dir/serverMain.cpp.o: /usr/local/include/opencv4/opencv2/calib3d.hpp

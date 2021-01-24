@@ -1,5 +1,4 @@
 #!/bin/bash
-#TODO: add colors to client/server output to show important things
 #TODO@server.cpp:123: break out of this loop to rejoin main when a running variable inside of caller is set to false
 #TODO: separate server class into successive child classes for each part for better organization (?)
 files=("/home/will/Pictures/1humu.jpg" "/home/will/Pictures/2parrot.jpg" "/home/will/Pictures/3flamingos.jpg" "/home/will/Pictures/4Giraffes.jpg" "/home/will/Pictures/5below.jpg" "/home/will/Pictures/6flags.jpg" "/home/will/Pictures/7movie.jpg")

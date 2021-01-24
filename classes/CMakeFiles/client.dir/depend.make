@@ -4,6 +4,7 @@
 classes/CMakeFiles/client.dir/client.cpp.o: classes/client.cpp
 classes/CMakeFiles/client.dir/client.cpp.o: classes/client.h
 classes/CMakeFiles/client.dir/client.cpp.o: classes/transmitter.h
+classes/CMakeFiles/client.dir/client.cpp.o: colors.h
 classes/CMakeFiles/client.dir/client.cpp.o: csapp/csapp.h
 classes/CMakeFiles/client.dir/client.cpp.o: /usr/local/include/opencv4/opencv2/calib3d.hpp
 classes/CMakeFiles/client.dir/client.cpp.o: /usr/local/include/opencv4/opencv2/core.hpp

@@ -14,7 +14,7 @@ client::client(int clientNumberArg) {
 
 int client::setup() {
     clientFileDescriptor = Open_clientfd(const_cast<char *>(host.c_str()), port);
-    if(clientFileDescriptor >= 0) { printf("Client connected to server\n"); }
+    if(clientFileDescriptor >= 0) { printf(FGRN("Client connected to server\n")); }
     return clientFileDescriptor;
 }
 
