@@ -194,6 +194,60 @@ server.cpp.s:
 	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/server.cpp.s
 .PHONY : server.cpp.s
 
+serverPreThreaded.o: serverPreThreaded.cpp.o
+
+.PHONY : serverPreThreaded.o
+
+# target to build an object file
+serverPreThreaded.cpp.o:
+	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/serverPreThreaded.cpp.o
+.PHONY : serverPreThreaded.cpp.o
+
+serverPreThreaded.i: serverPreThreaded.cpp.i
+
+.PHONY : serverPreThreaded.i
+
+# target to preprocess a source file
+serverPreThreaded.cpp.i:
+	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/serverPreThreaded.cpp.i
+.PHONY : serverPreThreaded.cpp.i
+
+serverPreThreaded.s: serverPreThreaded.cpp.s
+
+.PHONY : serverPreThreaded.s
+
+# target to generate assembly for a file
+serverPreThreaded.cpp.s:
+	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/serverPreThreaded.cpp.s
+.PHONY : serverPreThreaded.cpp.s
+
+serverThreaded.o: serverThreaded.cpp.o
+
+.PHONY : serverThreaded.o
+
+# target to build an object file
+serverThreaded.cpp.o:
+	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/serverThreaded.cpp.o
+.PHONY : serverThreaded.cpp.o
+
+serverThreaded.i: serverThreaded.cpp.i
+
+.PHONY : serverThreaded.i
+
+# target to preprocess a source file
+serverThreaded.cpp.i:
+	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/serverThreaded.cpp.i
+.PHONY : serverThreaded.cpp.i
+
+serverThreaded.s: serverThreaded.cpp.s
+
+.PHONY : serverThreaded.s
+
+# target to generate assembly for a file
+serverThreaded.cpp.s:
+	cd /home/will/Documents/AdBed_Project/build && $(MAKE) -f classes/CMakeFiles/server.dir/build.make classes/CMakeFiles/server.dir/serverThreaded.cpp.s
+.PHONY : serverThreaded.cpp.s
+
 transmitter.o: transmitter.cpp.o
 
 .PHONY : transmitter.o
@@ -240,6 +294,12 @@ help:
 	@echo "... server.o"
 	@echo "... server.i"
 	@echo "... server.s"
+	@echo "... serverPreThreaded.o"
+	@echo "... serverPreThreaded.i"
+	@echo "... serverPreThreaded.s"
+	@echo "... serverThreaded.o"
+	@echo "... serverThreaded.i"
+	@echo "... serverThreaded.s"
 	@echo "... transmitter.o"
 	@echo "... transmitter.i"
 	@echo "... transmitter.s"

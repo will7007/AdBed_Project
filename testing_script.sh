@@ -4,6 +4,7 @@
 files=("/home/will/Pictures/1humu.jpg" "/home/will/Pictures/2parrot.jpg" "/home/will/Pictures/3flamingos.jpg" "/home/will/Pictures/4Giraffes.jpg" "/home/will/Pictures/5below.jpg" "/home/will/Pictures/6flags.jpg" "/home/will/Pictures/7movie.jpg")
 
 echo "Welcome to William's Advanced Embedded Sockets & Theads project!"
+echo "Make sure you are running this script as a ROOT USER so we can make sockets."
 echo "Pick a number to test a different part of the project:"
 echo "1 = single-threaded server"
 echo "2 = multi-threaded server"
@@ -33,4 +34,5 @@ else
 fi
 read
 echo "All done, closing server"
+echo $serverPID
 kill $serverPID

@@ -6,7 +6,15 @@ int main(int argc, char **argv)
 {
     int version = 2;
     if(argc == 2) { version = atoi(argv[1]); }
-    server serverTransmitter = server(version);
-    serverTransmitter.listen();
+    if(version == 1) {
+        server serverTransmitter = server();
+        serverTransmitter.listen();
+    } else if(version == 2) {
+        serverThreaded serverTransmitter = serverThreaded();
+        serverTransmitter.listen();
+    } else {
+        serverPreThreaded serverTransmitter = serverPreThreaded((version == 4));
+        serverTransmitter.listen();
+    }
     exit(0);
 }

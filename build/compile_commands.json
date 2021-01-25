@@ -21,6 +21,16 @@
 },
 {
   "directory": "/home/will/Documents/AdBed_Project/build/classes",
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server.dir/serverThreaded.cpp.o -c /home/will/Documents/AdBed_Project/classes/serverThreaded.cpp",
+  "file": "/home/will/Documents/AdBed_Project/classes/serverThreaded.cpp"
+},
+{
+  "directory": "/home/will/Documents/AdBed_Project/build/classes",
+  "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server.dir/serverPreThreaded.cpp.o -c /home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp",
+  "file": "/home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp"
+},
+{
+  "directory": "/home/will/Documents/AdBed_Project/build/classes",
   "command": "/usr/bin/c++   -I/home/will/Documents/AdBed_Project/classes -I/home/will/Documents/AdBed_Project/csapp -isystem /usr/local/include/opencv4  -g   -o CMakeFiles/server.dir/transmitter.cpp.o -c /home/will/Documents/AdBed_Project/classes/transmitter.cpp",
   "file": "/home/will/Documents/AdBed_Project/classes/transmitter.cpp"
 },

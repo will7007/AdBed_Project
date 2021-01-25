@@ -70,9 +70,35 @@ classes/CMakeFiles/server.dir/server.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/server.cpp.s"
 	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/will/Documents/AdBed_Project/classes/server.cpp -o CMakeFiles/server.dir/server.cpp.s
 
+classes/CMakeFiles/server.dir/serverThreaded.cpp.o: classes/CMakeFiles/server.dir/flags.make
+classes/CMakeFiles/server.dir/serverThreaded.cpp.o: ../classes/serverThreaded.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/will/Documents/AdBed_Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object classes/CMakeFiles/server.dir/serverThreaded.cpp.o"
+	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/serverThreaded.cpp.o -c /home/will/Documents/AdBed_Project/classes/serverThreaded.cpp
+
+classes/CMakeFiles/server.dir/serverThreaded.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/serverThreaded.cpp.i"
+	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/will/Documents/AdBed_Project/classes/serverThreaded.cpp > CMakeFiles/server.dir/serverThreaded.cpp.i
+
+classes/CMakeFiles/server.dir/serverThreaded.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/serverThreaded.cpp.s"
+	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/will/Documents/AdBed_Project/classes/serverThreaded.cpp -o CMakeFiles/server.dir/serverThreaded.cpp.s
+
+classes/CMakeFiles/server.dir/serverPreThreaded.cpp.o: classes/CMakeFiles/server.dir/flags.make
+classes/CMakeFiles/server.dir/serverPreThreaded.cpp.o: ../classes/serverPreThreaded.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/will/Documents/AdBed_Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object classes/CMakeFiles/server.dir/serverPreThreaded.cpp.o"
+	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/serverPreThreaded.cpp.o -c /home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp
+
+classes/CMakeFiles/server.dir/serverPreThreaded.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/serverPreThreaded.cpp.i"
+	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp > CMakeFiles/server.dir/serverPreThreaded.cpp.i
+
+classes/CMakeFiles/server.dir/serverPreThreaded.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/serverPreThreaded.cpp.s"
+	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp -o CMakeFiles/server.dir/serverPreThreaded.cpp.s
+
 classes/CMakeFiles/server.dir/transmitter.cpp.o: classes/CMakeFiles/server.dir/flags.make
 classes/CMakeFiles/server.dir/transmitter.cpp.o: ../classes/transmitter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/will/Documents/AdBed_Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object classes/CMakeFiles/server.dir/transmitter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/will/Documents/AdBed_Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object classes/CMakeFiles/server.dir/transmitter.cpp.o"
 	cd /home/will/Documents/AdBed_Project/build/classes && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/transmitter.cpp.o -c /home/will/Documents/AdBed_Project/classes/transmitter.cpp
 
 classes/CMakeFiles/server.dir/transmitter.cpp.i: cmake_force
@@ -86,16 +112,20 @@ classes/CMakeFiles/server.dir/transmitter.cpp.s: cmake_force
 # Object files for target server
 server_OBJECTS = \
 "CMakeFiles/server.dir/server.cpp.o" \
+"CMakeFiles/server.dir/serverThreaded.cpp.o" \
+"CMakeFiles/server.dir/serverPreThreaded.cpp.o" \
 "CMakeFiles/server.dir/transmitter.cpp.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
 classes/libserver.a: classes/CMakeFiles/server.dir/server.cpp.o
+classes/libserver.a: classes/CMakeFiles/server.dir/serverThreaded.cpp.o
+classes/libserver.a: classes/CMakeFiles/server.dir/serverPreThreaded.cpp.o
 classes/libserver.a: classes/CMakeFiles/server.dir/transmitter.cpp.o
 classes/libserver.a: classes/CMakeFiles/server.dir/build.make
 classes/libserver.a: classes/CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/will/Documents/AdBed_Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libserver.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/will/Documents/AdBed_Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libserver.a"
 	cd /home/will/Documents/AdBed_Project/build/classes && $(CMAKE_COMMAND) -P CMakeFiles/server.dir/cmake_clean_target.cmake
 	cd /home/will/Documents/AdBed_Project/build/classes && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 

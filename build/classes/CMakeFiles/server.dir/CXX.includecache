@@ -19,6 +19,16 @@ pthread.h
 -
 queue
 -
+../colors.h
+/home/will/Documents/AdBed_Project/colors.h
+
+/home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp
+server.h
+/home/will/Documents/AdBed_Project/classes/server.h
+
+/home/will/Documents/AdBed_Project/classes/serverThreaded.cpp
+server.h
+/home/will/Documents/AdBed_Project/classes/server.h
 
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp
@@ -29,6 +39,8 @@ sys/socket.h
 -
 ../csapp/csapp.h
 /home/will/Documents/AdBed_Project/csapp/csapp.h
+
+/home/will/Documents/AdBed_Project/colors.h
 
 /home/will/Documents/AdBed_Project/csapp/csapp.h
 stdio.h

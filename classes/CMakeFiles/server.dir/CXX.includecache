@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/will/Documents/AdBed_Project/classes/server.cpp
-server.h
-/home/will/Documents/AdBed_Project/classes/server.h
-
 /home/will/Documents/AdBed_Project/classes/server.h
 transmitter.h
 /home/will/Documents/AdBed_Project/classes/transmitter.h
@@ -22,9 +18,9 @@ queue
 ../colors.h
 /home/will/Documents/AdBed_Project/colors.h
 
-/home/will/Documents/AdBed_Project/classes/transmitter.cpp
-transmitter.h
-/home/will/Documents/AdBed_Project/classes/transmitter.h
+/home/will/Documents/AdBed_Project/classes/serverPreThreaded.cpp
+server.h
+/home/will/Documents/AdBed_Project/classes/server.h
 
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp

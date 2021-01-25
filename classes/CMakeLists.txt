@@ -1,5 +1,5 @@
 add_library(client client.cpp transmitter.cpp)
-add_library(server server.cpp transmitter.cpp)
+add_library(server server.cpp serverThreaded.cpp serverPreThreaded.cpp transmitter.cpp)
 target_include_directories (client PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories (server PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(client ${OpenCV_LIBS} csapp)

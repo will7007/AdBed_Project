@@ -13,6 +13,8 @@ string
 -
 ../csapp/csapp.h
 /home/will/Documents/AdBed_Project/csapp/csapp.h
+../colors.h
+/home/will/Documents/AdBed_Project/colors.h
 
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp
@@ -31,6 +33,10 @@ classes/client.h
 /home/will/Documents/AdBed_Project/classes/client.h
 opencv2/opencv.hpp
 -
+./colors.h
+/home/will/Documents/AdBed_Project/colors.h
+
+/home/will/Documents/AdBed_Project/colors.h
 
 /home/will/Documents/AdBed_Project/csapp/csapp.h
 stdio.h

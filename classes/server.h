@@ -7,33 +7,41 @@
 #include <queue>
 #include "../colors.h"
 
-class server : public transmitter { //maybe split into successive child classes for different parts?
-private:
+class server : public transmitter {
+protected:
     int fileDescriptorListen;
-    int codeVersion = 2;
-    //single-threaded
+    int sleepTime = 10;
     void transaction(server *caller, int *fileDescriptor);
     void displayConnectionInfo(sockaddr_in *clientaddr);
-    //threaded
+public:
+    void listen();
+    cv::Mat* operate(cv::Mat *input);
+};
+
+class serverThreaded : public server {
+protected:
     static void* transactionThreaded(void *connectionFileDescriptor);
+    pthread_t* threadID;
     struct threadArgs {
-        server* caller;
+        serverThreaded* caller;
         int* fd;
     };
-    //pre-threaded
+public:
+    void listen();
+};
+
+class serverPreThreaded : public serverThreaded {
+protected:
+    bool prioritizeMainThread;
     std::queue<int *> connectionQueue;
     pthread_mutex_t queueMutex;
     static void* transactionConsumer(void *callerArg);
     int maxThreads = 7;
-    pthread_t* threadID;
     pthread_cond_t hungry, justAte;
     int queueLimit = 14; //should be 2*maxThreads
     int getThreadPriority();
-    int sleepTime = 10;
 public:
-    server(int codeVersionArg = 2);
-    ~server() {};
+    serverPreThreaded(bool prioritizeMainThreadArg = false);
     void listen();
-    cv::Mat* operate(cv::Mat *input);
 };
 #endif
