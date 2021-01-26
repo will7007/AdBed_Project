@@ -11,11 +11,12 @@ class server : public transmitter {
 protected:
     int fileDescriptorListen;
     int sleepTime = 10;
-    void transaction(server *caller, int *fileDescriptor);
+    bool running = true;
+    bool transaction(server *caller, int *fileDescriptor);
     void displayConnectionInfo(sockaddr_in *clientaddr);
 public:
     void listen();
-    cv::Mat* operate(cv::Mat *input);
+    cv::Mat* operate(cv::Mat *input, uint8_t operations);
 };
 
 class serverThreaded : public server {

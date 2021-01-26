@@ -12,31 +12,57 @@ void server::listen() {
     
     printf("Running single-threaded server\n");
     fileDescriptorListen = Open_listenfd(port);
-    while (1) {
+    while (running) {
         int fileDescriptor = Accept(fileDescriptorListen, (SA *)&clientaddr, &clientlen);
         displayConnectionInfo(&clientaddr);
-        transaction(this, &fileDescriptor);
+        running = transaction(this, &fileDescriptor);
+    }
+    close(fileDescriptorListen);
+}
+
+cv::Mat* server::operate(cv::Mat *input, uint8_t operations) {
+    cv::Mat *newImage = new cv::Mat();
+    //input->copyTo(&newImage);
+    if(operations == 0x0) {
+        delete newImage;
+        return nullptr;
+    } else {
+        input->copyTo(*newImage);
+        if(operations & 0x1) {
+            cv::cvtColor(*newImage, *newImage, cv::COLOR_BGR2GRAY);
+        }
+        if(operations & 0x2) {
+            cv::flip(*newImage, *newImage, 1);
+        }
+        if(operations & 0x4) {
+            cv::resize(*newImage, *newImage, cv::Size(), 0.5, 0.5);
+        }
+    return newImage;
     }
 }
 
-cv::Mat* server::operate(cv::Mat *input) {
-    cv::Mat *grayImage = new cv::Mat();
-    cv::cvtColor(*input, *grayImage, cv::COLOR_BGR2GRAY);
-    return grayImage;
-}
-
-void server::transaction(server *caller, int *fileDescriptor) {
+bool server::transaction(server *caller, int *fileDescriptor) {
     printf("Receiving image from client\n");
-    cv::Mat *receivedImage = caller->receive(*fileDescriptor);
-    printf("Received image over socket fd %d, sleeping for %d seconds\n", *fileDescriptor, caller->sleepTime);
-    sleep(caller->sleepTime);
-    printf("Performing OpenCV operations on image\n");
-    cv::Mat *newImage = caller->operate(receivedImage);
+    std::pair<transmitter::transmitSize*, cv::Mat*> receivedData = caller->receive(*fileDescriptor);
+    cv::Mat *receivedImage = receivedData.second;
+    uint8_t operations = receivedData.first->operations;
+    printf("Received image over socket fd %d, performing requested OpenCV operations\n", *fileDescriptor);
+    cv::Mat *newImage = caller->operate(receivedImage, operations);
     delete receivedImage->datastart;
     delete receivedImage;
-    printf("Server thread with fd %d sent %d bytes\n", *fileDescriptor, caller->send(newImage, *fileDescriptor));
-    delete newImage;
-    Close(*fileDescriptor);
+    if(newImage != nullptr && newImage->data) {
+        printf("Sleeping for %d seconds\n", caller->sleepTime);
+        sleep(caller->sleepTime);
+        printf("Server thread with fd %d sent %d bytes\n", *fileDescriptor, caller->send(newImage, *fileDescriptor));
+        delete newImage;
+        Close(*fileDescriptor);
+        return true;
+    } else {
+        printf("No operations were requested by the client: shutting down\n");
+        Close(*fileDescriptor);
+        return false;
+    }
+   
 }
 
 void server::displayConnectionInfo(sockaddr_in *clientaddr) {

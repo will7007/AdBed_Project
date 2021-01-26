@@ -1,17 +1,17 @@
 #include "transmitter.h"
 
-cv::Mat* transmitter::receive(int fileDescriptor) {
+std::pair<transmitter::transmitSize*, cv::Mat*> transmitter::receive(int fileDescriptor) {
     transmitSize *size = receiveSize(fileDescriptor);
-    cv::Mat* returnValue = nullptr;
+    cv::Mat* image = nullptr;
     if(size != nullptr) {
-        returnValue = receiveImage(size, fileDescriptor);
-        delete size;
+        image = receiveImage(size, fileDescriptor);
+        // delete size;
     }
-    return returnValue;
+    return std::make_pair(size,image);
 }
 
-int transmitter::send(cv::Mat* image, int fileDescriptor) {
-    return sendSize(image, fileDescriptor) ? sendImage(image, fileDescriptor) : 0;
+int transmitter::send(cv::Mat* image, int fileDescriptor, uint8_t operations) {
+    return sendSize(image, fileDescriptor, operations) ? sendImage(image, fileDescriptor) : 0;
 }
 
 transmitter::transmitSize* transmitter::receiveSize(int fileDescriptor) {
@@ -25,12 +25,13 @@ transmitter::transmitSize* transmitter::receiveSize(int fileDescriptor) {
     }
 }
 
-bool transmitter::sendSize(cv::Mat* image, int fileDescriptor) {
+bool transmitter::sendSize(cv::Mat* image, int fileDescriptor, uint8_t operations) {
     cv::Size size = image->size();
     transmitSize sendBuf;
     sendBuf.width = size.width;
     sendBuf.height = size.height;
     sendBuf.channels = image->channels();
+    sendBuf.operations = operations;
     return (write(fileDescriptor,&sendBuf,10) == 10);
 }
 

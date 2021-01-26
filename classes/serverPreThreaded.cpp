@@ -24,7 +24,7 @@ void serverPreThreaded::listen() {
         pthread_attr_init(&threadAttr);
         pthread_attr_setinheritsched(&threadAttr, PTHREAD_EXPLICIT_SCHED);
         pthread_attr_setschedpolicy(&threadAttr, SCHED_RR);
-        if(my_param.sched_priority > 1) { my_param.sched_priority -= 1;}
+        if(my_param.sched_priority >= 1) { my_param.sched_priority -= 1;}
         pthread_attr_setschedparam(&threadAttr, &my_param);
 
         for(int threads = 0; threads < maxThreads; threads++) {
@@ -38,25 +38,39 @@ void serverPreThreaded::listen() {
         }
     }
 
-    while(1) {
+    while(running) {
         int *fileDescriptor = new int;
         *fileDescriptor = Accept(fileDescriptorListen, (SA *)&clientaddr, &clientlen);
-        displayConnectionInfo(&clientaddr);
-        pthread_mutex_lock(&queueMutex);
-        if(connectionQueue.size() >= queueLimit) {
-            printf(FYEL("The queue is full (with %lu file descriptors)\n"), connectionQueue.size());
-            printf(FYEL("Connection %d will be added once there is room: main thread is waiting for room...\n"), *fileDescriptor);
-            pthread_cond_wait(&justAte,&queueMutex);
+        if(running) {
+            displayConnectionInfo(&clientaddr);
+            pthread_mutex_lock(&queueMutex);
+            if(connectionQueue.size() >= queueLimit) {
+                printf(FYEL("The queue is full (with %lu file descriptors)\n"), connectionQueue.size());
+                printf(FYEL("Connection %d will be added once there is room: main thread is waiting for room...\n"), *fileDescriptor);
+                pthread_cond_wait(&justAte,&queueMutex);
+            }
+            connectionQueue.push(fileDescriptor);
+            printf(FCYN("Connection %d was added to the queue: size is now %lu\n"), *fileDescriptor, connectionQueue.size());
+            pthread_mutex_unlock(&queueMutex);
+            pthread_cond_signal(&hungry);
+        } else {
+            Close(*fileDescriptor);
+            break;
         }
-        connectionQueue.push(fileDescriptor);
-        printf(FCYN("Connection %d was added to the queue: size is now %lu\n"), *fileDescriptor, connectionQueue.size());
-        pthread_mutex_unlock(&queueMutex);
-        pthread_cond_signal(&hungry);
+    }
+    //FIXME this area is never reached: because we have to store file descriptors in our queue as per project specs,
+    //we can't see the operations (or lack thereof) that the client wants and thus we will be stuck
+    //waiting to accept the next file descriptor sent after a termination operation (one that will never come).
+    pthread_cond_signal(&hungry); //ensure everyone woke up
+    for(int threads = 0; threads < maxThreads; threads++) {     
+        printf("Waiting for thread %d to come back home", threads);
+        pthread_join(threadID[threads], NULL);
     }
     delete threadID;
     pthread_mutex_destroy(&queueMutex);
     pthread_cond_destroy(&hungry);
     pthread_cond_destroy(&justAte);
+    Close(fileDescriptorListen);
 }
 
 void* serverPreThreaded::transactionConsumer(void *callerArg) {
@@ -72,20 +86,25 @@ void* serverPreThreaded::transactionConsumer(void *callerArg) {
     }
     if(threadNumber < -1) { printf("Something is wrong with the threads... (thread ID is -1\n"); }
     int processedImages = 0;
-    while(1) { //TODO: break out of this loop to rejoin main when a running variable inside of caller is set to false
+    // while(caller->running) { //FIXME segfault
+    while(true) {
         pthread_mutex_lock(&(caller->queueMutex));
         if(caller->connectionQueue.empty()) {
             printf(FBLU("Connection queue is empty, so thread %d is sleeping\n"), threadNumber);
             pthread_cond_wait(&(caller->hungry), &(caller->queueMutex));
         }
+    // if(caller->running) {
         int fileDescriptor = *(caller->connectionQueue.front());
         delete caller->connectionQueue.front();
         caller->connectionQueue.pop();
         pthread_mutex_unlock(&(caller->queueMutex));
         pthread_cond_signal(&(caller->justAte));
         printf(FRED("Thread %d just ate connection %d\n"), threadNumber, fileDescriptor);
-        caller->transaction(caller, &fileDescriptor);
-        printf(FBLU("Thread %d has processed %d image(s) so far\n"), threadNumber, ++processedImages);
+        // caller->running = caller->transaction(caller, &fileDescriptor); //see the fix me above
+        if(caller->transaction(caller, &fileDescriptor)) {
+            printf(FBLU("Thread %d has processed %d image(s) so far\n"), threadNumber, ++processedImages);
+        } else { printf("Sorry, canceling the pre-threaded server over the network is not supported yet\n"); }
+    // } else { break; }
     }
     printf("Thread %d is shutting down\n", threadNumber);
     return nullptr;

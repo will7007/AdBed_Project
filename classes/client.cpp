@@ -28,6 +28,6 @@ void client::show(cv::Mat *imgOriginal, cv::Mat *imgModified) {
     cv::waitKey(0);
 }
 
-cv::Mat* client::receive() { return transmitter::receive(clientFileDescriptor); }
+cv::Mat* client::receive() { return transmitter::receive(clientFileDescriptor).second; }
 
-int client::send(cv::Mat* image) { return transmitter::send(image, clientFileDescriptor); }
+int client::send(cv::Mat* image, uint8_t operations) { return transmitter::send(image, clientFileDescriptor, operations); }

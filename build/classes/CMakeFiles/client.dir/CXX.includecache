@@ -17,6 +17,8 @@ string
 -
 ../csapp/csapp.h
 /home/will/Documents/AdBed_Project/csapp/csapp.h
+../colors.h
+/home/will/Documents/AdBed_Project/colors.h
 
 /home/will/Documents/AdBed_Project/classes/transmitter.cpp
 transmitter.h
@@ -31,6 +33,8 @@ sys/socket.h
 -
 ../csapp/csapp.h
 /home/will/Documents/AdBed_Project/csapp/csapp.h
+
+/home/will/Documents/AdBed_Project/colors.h
 
 /home/will/Documents/AdBed_Project/csapp/csapp.h
 stdio.h

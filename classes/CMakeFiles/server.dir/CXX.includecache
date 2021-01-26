@@ -22,6 +22,10 @@ queue
 server.h
 /home/will/Documents/AdBed_Project/classes/server.h
 
+/home/will/Documents/AdBed_Project/classes/serverThreaded.cpp
+server.h
+/home/will/Documents/AdBed_Project/classes/server.h
+
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp
 -

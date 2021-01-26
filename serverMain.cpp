@@ -16,5 +16,6 @@ int main(int argc, char **argv)
         serverPreThreaded serverTransmitter = serverPreThreaded((version == 4));
         serverTransmitter.listen();
     }
+    printf("Server actually shutting down now");
     exit(0);
 }

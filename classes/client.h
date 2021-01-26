@@ -20,7 +20,7 @@ public:
     ~client();
     void show(cv::Mat *imgOriginal, cv::Mat *imgModified);
     cv::Mat* receive();
-    int send(cv::Mat* image);
+    int send(cv::Mat* image, uint8_t operations);
     int getFileDescriptor() { return clientFileDescriptor; }
 };
 #endif
