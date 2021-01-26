@@ -97,9 +97,9 @@ void* serverPreThreaded::transactionConsumer(void *callerArg) {
         int fileDescriptor = *(caller->connectionQueue.front());
         delete caller->connectionQueue.front();
         caller->connectionQueue.pop();
+        printf(FRED("Thread %d just ate connection %d, queue size is now %d\n"), threadNumber, fileDescriptor, (int)caller->connectionQueue.size());
         pthread_mutex_unlock(&(caller->queueMutex));
         pthread_cond_signal(&(caller->justAte));
-        printf(FRED("Thread %d just ate connection %d\n"), threadNumber, fileDescriptor);
         // caller->running = caller->transaction(caller, &fileDescriptor); //see the fix me above
         if(caller->transaction(caller, &fileDescriptor)) {
             printf(FBLU("Thread %d has processed %d image(s) so far\n"), threadNumber, ++processedImages);

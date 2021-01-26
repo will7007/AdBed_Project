@@ -22,20 +22,14 @@ int main(int argc, char **argv)
 			break;
 		case 4:
 			showImage = false;
-			// printf("4th argument present: supressing image\n");
-			//any 4th arg disables showing the image
-			//flowthrough
 		case 3:
-			// printf("3th argument present: selecting operations\n");
 			operations = atoi(argv[2]);
 			if(!operations) {
 				printf(FGRN("Sorry, shutting down the server from the client isn't supported yet. "));
 				printf(FGRN("How about I ask for grayscale instead?\n"));
-				operations++;
+				operations = 1;
 			}
-			//flowthrough
 		case 2:
-			// printf("2nd argument present: custom image\n");
 			image = cv::imread(argv[1], 1);
 			if(!image.data) {
 				fprintf(stderr, "No image data in provided file\n");
