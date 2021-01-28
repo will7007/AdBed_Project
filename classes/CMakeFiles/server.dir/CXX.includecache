@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/will/Documents/AdBed_Project/classes/server.cpp
+server.h
+/home/will/Documents/AdBed_Project/classes/server.h
+
 /home/will/Documents/AdBed_Project/classes/server.h
 transmitter.h
 /home/will/Documents/AdBed_Project/classes/transmitter.h

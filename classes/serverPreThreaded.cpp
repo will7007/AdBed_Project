@@ -45,6 +45,7 @@ void serverPreThreaded::listen() {
             displayConnectionInfo(&clientaddr);
             pthread_mutex_lock(&queueMutex);
             if(connectionQueue.size() >= queueLimit) {
+                //sometimes seems to not show up when queue is full, likely because of unluckiness aquiring mutex
                 printf(FYEL("The queue is full (with %lu file descriptors)\n"), connectionQueue.size());
                 printf(FYEL("Connection %d will be added once there is room: main thread is waiting for room...\n"), *fileDescriptor);
                 pthread_cond_wait(&justAte,&queueMutex);

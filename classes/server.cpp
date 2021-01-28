@@ -46,6 +46,7 @@ bool server::transaction(server *caller, int *fileDescriptor) {
     std::pair<transmitter::transmitSize*, cv::Mat*> receivedData = caller->receive(*fileDescriptor);
     cv::Mat *receivedImage = receivedData.second;
     uint8_t operations = receivedData.first->operations;
+    delete receivedData.first;
     printf("Received image over socket fd %d, performing requested OpenCV operations\n", *fileDescriptor);
     cv::Mat *newImage = caller->operate(receivedImage, operations);
     delete receivedImage->datastart;

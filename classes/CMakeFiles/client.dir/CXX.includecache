@@ -20,10 +20,6 @@ string
 ../colors.h
 /home/will/Documents/AdBed_Project/colors.h
 
-/home/will/Documents/AdBed_Project/classes/transmitter.cpp
-transmitter.h
-/home/will/Documents/AdBed_Project/classes/transmitter.h
-
 /home/will/Documents/AdBed_Project/classes/transmitter.h
 opencv2/opencv.hpp
 -
